@@ -22,16 +22,17 @@ function Example() {
     return `https://picsum.photos/id/${src}/${width}/${width}`;
   };
 
-  const { status, data, error, isFetching } = useQuery(
-    'photos',
-    async ({ pageParam = 1 }) => {
+  const { status, data, error, isFetching } = useQuery('photos', async () => {
+    const photos = [];
+    for (let i = 1; i <= 5; i++) {
       const res = await axios.get(
-        `https://picsum.photos/v2/list?page=${pageParam}&limit=500`
+        `https://picsum.photos/v2/list?page=${i}&limit=100`
       );
-
-      return { photos: res.data };
+      photos.push(...res.data);
     }
-  );
+
+    return photos;
+  });
 
   return (
     <div style={{ maxWidth: 1000, marginLeft: 'auto', marginRight: 'auto' }}>
@@ -42,7 +43,7 @@ function Example() {
         <span>Error: {error.message}</span>
       ) : (
         <>
-          {data.photos.map((photo) => (
+          {data.map((photo) => (
             <div style={{ padding: 10 }} key={photo.id}>
               <Image
                 src={photo.id}
