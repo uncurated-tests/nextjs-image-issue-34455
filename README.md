@@ -1,3 +1,3 @@
-# nextjs-nx8f23
+# Issue 34455
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/nextjs-nx8f23)
+[#34455](https://github.com/vercel/next.js/issues/34455)
